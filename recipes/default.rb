@@ -26,7 +26,7 @@
 packages = %w(
     sudo ntp 
     build-essential autoconf automake binutils-doc bison flex 
-    libc6 help2man libtool patch debconf-utils 
+    libc6 help2man libtool patch debconf-utils aptitude
     subversion git-core 
     curl wget vim-nox
     libncurses5-dev libssl-dev libxml2 libxml2-dev libxslt1.1 libxslt1-dev libmcrypt-dev 
@@ -36,6 +36,6 @@ packages = %w(
 )
 
 
-pckages.each do |pkg|
+packages.each do |pkg|
   package pkg
 end
