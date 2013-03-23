@@ -41,6 +41,7 @@ packages.each do |pkg|
   package pkg
 end
 
+gem_package "ruby-shadow"
 
 # TODO: install system VIM
 # https://raw.github.com/sid137/.vim/vundler/vimrc /etc/vim/vimrc
