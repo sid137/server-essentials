@@ -23,9 +23,10 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+# set locale
 packages = %w(
     sudo ntp 
-    build-essential autoconf automake binutils-doc bison flex 
+    build-essential autoconf automake binutils-doc bison flex g++
     libc6 help2man libtool patch debconf-utils aptitude
     subversion git-core mercurial
     curl wget vim-nox
@@ -42,4 +43,6 @@ end
 
 
 # TODO: install system VIM
+# https://raw.github.com/sid137/.vim/vundler/vimrc /etc/vim/vimrc
 # TODO: install system shell
+include_recipe "server-essentials::security"
