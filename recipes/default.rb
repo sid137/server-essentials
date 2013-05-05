@@ -26,9 +26,6 @@
 # set locale
 include_recipe 'apt'
 
-# Forcing.. not updating for some reasonk
-execute "apt-get update"
-
 packages = %w(
     sudo ntp 
     build-essential autoconf automake binutils-doc bison flex g++
