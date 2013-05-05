@@ -26,6 +26,9 @@
 # set locales 
 cookbook_file "/etc/profile.d/locales.sh" do
   source 'locales.sh'
+  owner "root"
+  group "root"
+  mode 0755
 end
 
 include_recipe 'apt'
