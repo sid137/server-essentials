@@ -23,7 +23,11 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-# set locale
+# set locales 
+cookbook_file "/etc/profiles.d/locales.sh" do
+  source 'locales.sh'
+end
+
 include_recipe 'apt'
 
 packages = %w(
