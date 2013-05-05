@@ -24,6 +24,8 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 # set locale
+include_recipe 'apt'
+
 packages = %w(
     sudo ntp 
     build-essential autoconf automake binutils-doc bison flex g++
@@ -41,6 +43,7 @@ packages.each do |pkg|
   package pkg
 end
 
+# For password shadowing
 gem_package "ruby-shadow"
 
 # TODO: install system VIM
