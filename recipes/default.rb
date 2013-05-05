@@ -43,6 +43,7 @@ packages = %w(
     zlib1g zlib1g-dev zlibc libevent-dev 
     libbz2-dev libpcre3 libpcre3-dev libpcrecpp0 libssl0.9.8 libreadline5 
     ssl-cert screen unzip unrar-free coreutils zsh 
+    python-virtualenv
 )
 
 
