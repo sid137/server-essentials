@@ -24,7 +24,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 # set locales 
-cookbook_file "/etc/profiles.d/locales.sh" do
+cookbook_file "/etc/profile.d/locales.sh" do
   source 'locales.sh'
 end
 
