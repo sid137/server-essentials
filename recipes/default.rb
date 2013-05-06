@@ -41,7 +41,7 @@ packages = %w(
     curl wget vim-nox
     libncurses5-dev libssl-dev libxml2 libxml2-dev libxslt1.1 libxslt1-dev libmcrypt-dev 
     zlib1g zlib1g-dev zlibc libevent-dev 
-    libbz2-dev libpcre3 libpcre3-dev libpcrecpp0 libssl0.9.8 libreadline5 
+    libbz2-dev libpcre3 libpcre3-dev libpcrecpp0 libssl0.9.8 libreadline5 libcurl4-openssl-dev
     ssl-cert screen unzip unrar-free coreutils zsh 
     python-virtualenv
 )
