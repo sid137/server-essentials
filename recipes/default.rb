@@ -51,13 +51,15 @@ packages.each do |pkg|
   package pkg
 end
 
-apt_repository "salt-stack" do
-  uri "http://ppa.launchpad.net/saltstack/salt/ubuntu"
-  distribution node['lsb']['codename']
-  components ["main"]
-  keyserver "keyserver.ubuntu.com"
-  key "0E27C0A6"
-end
+execute "yes | add-apt-repository ppa:saltstack/salt"
+execute "apt-get update"
+# apt_repository "salt-stack" do
+#   uri "http://ppa.launchpad.net/saltstack/salt/ubuntu"
+#   distribution node['lsb']['codename']
+#   components ["main"]
+#   keyserver "keyserver.ubuntu.com"
+#   key "0E27C0A6"
+# end
 
 %w(salt-master salt-minion salt-syndic).each do |pkg|
   package pkg
