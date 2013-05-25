@@ -51,8 +51,17 @@ packages.each do |pkg|
   package pkg
 end
 
-execute "yes | add-apt-repository ppa:saltstack/salt"
-execute "apt-get update"
+bash "get salt repository key" do
+  user "root"
+  cwd "/tmp"
+  code <<-EOH
+  echo deb http://ppa.launchpad.net/saltstack/salt/ubuntu `lsb_release -sc` main | sudo tee /etc/apt/sources.list.d/saltstack.list
+  wget -q -O- "http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0x4759FA960E27C0A6" | sudo apt-key add -
+  apt-get update
+  EOH
+end
+
+# execute "yes | add-apt-repository ppa:saltstack/salt"
 # apt_repository "salt-stack" do
 #   uri "http://ppa.launchpad.net/saltstack/salt/ubuntu"
 #   distribution node['lsb']['codename']
