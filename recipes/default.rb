@@ -56,6 +56,7 @@ apt_repository "salt-stack" do
   distribution node['lsb']['codename']
   components ["main"]
   keyserver "keyserver.ubuntu.com"
+  key "0E27C0A6"
 end
 
 %w(salt-master salt-minion salt-syndic).each do |pkg|
