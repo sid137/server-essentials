@@ -43,13 +43,30 @@ packages = %w(
     zlib1g zlib1g-dev zlibc libevent-dev 
     libbz2-dev libpcre3 libpcre3-dev libpcrecpp0 libssl0.9.8 libreadline5 libcurl4-openssl-dev
     ssl-cert screen unzip unrar-free coreutils zsh 
-    python-virtualenv
+    python-virtualenv software-properties-common
 )
 
 
 packages.each do |pkg|
   package pkg
 end
+
+apt_repository "salt-stack" do
+  uri "http://ppa.launchpad.net/saltstack/salt/ubuntu"
+  distribution node['lsb']['codename']
+  components ["main"]
+  keyserver "keyserver.ubuntu.com"
+end
+
+%w(salt-master salt-minion salt-syndic).each do |pkg|
+  package pkg
+end
+
+append_if_no_line "salt master" do
+  path "/etc/salt/minion"
+  line "master: salt.sid137.com" 
+end
+execute "restart salt-minion"
 
 # For password shadowing
 gem_package "ruby-shadow"
