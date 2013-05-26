@@ -83,7 +83,4 @@ end
 # For password shadowing
 gem_package "ruby-shadow"
 
-# TODO: install system VIM
-# https://raw.github.com/sid137/.vim/vundler/vimrc /etc/vim/vimrc
-# TODO: install system shell
 include_recipe "server-essentials::security"
