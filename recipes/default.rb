@@ -74,11 +74,11 @@ end
   package pkg
 end
 
-append_if_no_line "salt master" do
-  path "/etc/salt/minion"
-  line "master: salt.sid137.com" 
+line = `grep "master: salt.sid137.com" /etc/salt/minion `
+if line.empty?
+  `echo "master: salt.sid137.com" >> /etc/salt/minion`
+  execute "restart salt-minion"
 end
-execute "restart salt-minion"
 
 # For password shadowing
 gem_package "ruby-shadow"
