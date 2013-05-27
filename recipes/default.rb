@@ -49,6 +49,27 @@ packages.each do |pkg|
   package pkg
 end
 
+bash "create swapfile for nginx install" do
+  user "root"
+  code <<-EOH
+  swapoff -a
+  dd if=/dev/zero of=/swapfile bs=1024 count=1024k
+  chown root:root /swapfile
+  chmod 0600 /swapfile
+  mkswap /swapfile
+  swapon /swapfile
+  EOH
+  not_if do
+    File.exists?("/swapfile")
+  end
+end
+
+# Activate swapfile on reboots
+append_if_no_line "fstab swapfile" do
+  path "/etc/fstab"
+  line '/swapfile1 swap swap defaults 0 0'
+end
+
 bash "get salt repository key" do
   user "root"
   cwd "/tmp"
@@ -82,7 +103,7 @@ end
 
 append_if_no_line "zaliases" do
   path "/etc/salt/minion"
-  line 'echo "master: salt.sid137.com" >> /etc/salt/minion'
+  line 'master: salt.sid137.com'
 end
 execute "restart salt-minion"
 
