@@ -4,6 +4,13 @@ include_recipe "server-essentials::user"
 
 # disable root login over ssh
 execute "sed -i.bak 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config"
+
+# Allow SSH agent forwarding
+append_if_no_line "sshd agent forwarding" do
+  path "/etc/ssh/sshd_config"
+  line 'AllowAgentForwarding yes'
+end
+
 service "ssh" do
   action :restart
 end
