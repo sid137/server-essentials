@@ -1,0 +1,3 @@
+{"run_list":[
+  "recipe[user]", "recipe[server-essentials]"
+]}

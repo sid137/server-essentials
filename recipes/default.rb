@@ -1,4 +1,3 @@
-#
 # Cookbook Name:: server-essentials
 # Recipe:: default
 #
@@ -23,7 +22,7 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-# set locales 
+set locales 
 cookbook_file "/etc/profile.d/locales.sh" do
   source 'locales.sh'
   owner "root"
@@ -45,7 +44,6 @@ packages = %w(
     ssl-cert screen unzip unrar-free coreutils zsh 
     python-virtualenv software-properties-common
 )
-
 
 packages.each do |pkg|
   package pkg
@@ -74,13 +72,18 @@ end
   package pkg
 end
 
-line = `grep "master: salt.sid137.com" /etc/salt/minion `
-if line.empty?
-  `echo "master: salt.sid137.com" >> /etc/salt/minion`
-  execute "restart salt-minion"
-end
+# This doesn't do what I think it does...  cause i'm trying to grep of line
+# locally, not on server
+# line = `grep "master: salt.sid137.com" /etc/salt/minion`
+# if line.empty?
+#   execute 'echo "master: salt.sid137.com" >> /etc/salt/minion'
+#   execute "restart salt-minion"
+# end
 
-# For password shadowing
-gem_package "ruby-shadow"
+append_if_no_line "zaliases" do
+  path "/etc/salt/minion"
+  line 'echo "master: salt.sid137.com" >> /etc/salt/minion'
+end
+execute "restart salt-minion"
 
 include_recipe "server-essentials::security"

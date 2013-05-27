@@ -1,13 +1,22 @@
 # http://www.cyberciti.biz/tips/linux-security.html
-# disable root login with passwords
-# disable telnet, ftp, rlogin, rsh
+# create non-root user
+include_recipe "server-essentials::user"
+
+# disable root login over ssh
+execute "sed -i.bak 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config"
+service "ssh" do
+  action :restart
+end
+
+# disable telnet
+#     default
+# ftp, rlogin, rsh
 # Password Restrictions
 #   password aging?
 #   password reuse
 # Lock accounts after Login Failures
 # no accounts with empty passwords
 # no uid0 accounts
-# Disable root login
 # Networking
 #   IPtables
 #   Check listening services
