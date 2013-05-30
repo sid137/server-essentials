@@ -108,7 +108,7 @@ end
 if node['lsb']['release'] == '12.10'
   execute "restart salt-minion"
 elsif node['lsb']['release'] == '13.04'
-  execute "service salt-minioni restart"
+  execute "service salt-minion restart"
 end
 
 include_recipe "server-essentials::security"
