@@ -105,6 +105,10 @@ append_if_no_line "zaliases" do
   path "/etc/salt/minion"
   line 'master: salt.sid137.com'
 end
-execute "restart salt-minion"
+if node['lsb']['release'] == '12.10'
+  execute "restart salt-minion"
+elsif node['lsb']['release'] == '13.04'
+  execute "service salt-minioni restart"
+end
 
 include_recipe "server-essentials::security"
